@@ -6,13 +6,10 @@ const state = {
   activity: [],
 };
 
-// Slow (so you can see it happening)
-const OVERLAY_STEP_MS = 2200;
-const EXPLAIN_STEP_MS = 1800;
+// Slow (so you can see it)
+const STEP_PAUSE_MS = 2500;
 
-// ✅ Video config
-const CLAW_VIDEO_VOLUME = 0.12; // low volume
-let clawVideoBound = false;
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
 function nowStamp() {
   const d = new Date();
@@ -43,21 +40,19 @@ function setOverlay(show, title="Solving ticket…", msg="Preparing…") {
   el.setAttribute("aria-hidden", show ? "false" : "true");
 }
 
-function renderOverlaySteps(steps, activeIndex) {
+function renderOverlaySteps(steps, activeIndex, doneCount) {
   const ul = document.getElementById("overlaySteps");
-  ul.innerHTML = steps.map((s, i) => {
-    const icon = i < activeIndex ? "✅" : i === activeIndex ? "⏳" : "•";
-    return `<li>${icon} ${esc(s)}</li>`;
+  ul.innerHTML = steps.map((label, i) => {
+    const isDone = i < doneCount;
+    const isActive = i === activeIndex && !isDone;
+
+    const cls = isDone ? "done" : (isActive ? "active" : "pending");
+    return `<li class="${cls}">${esc(label)}</li>`;
   }).join("");
 }
 
-function pill(status) {
-  if (status === "AUTO-SOLVED") return `<span class="pill green">AUTO-SOLVED</span>`;
-  if (status === "HUMAN ACTION REQUIRED") return `<span class="pill yellow">HUMAN ACTION REQUIRED</span>`;
-  return `<span class="pill blue">${esc(status)}</span>`;
-}
-
 function buildSolvePayload(t) {
+  // Minimized payload for security (no api_mock).
   return {
     ticket_id: t.ticket_id,
     subject: t.subject,
@@ -70,71 +65,6 @@ function buildSolvePayload(t) {
     expected_case_key: t.expected_case_key,
     booking_context: t.booking_context,
   };
-}
-
-// ✅ Video helpers
-function bindClawVideoOnce() {
-  if (clawVideoBound) return;
-  clawVideoBound = true;
-
-  const wrap = document.getElementById("clawVideoWrap");
-  const video = document.getElementById("clawVideo");
-  const muteBtn = document.getElementById("clawMuteBtn");
-
-  if (!wrap || !video || !muteBtn) return;
-
-  video.addEventListener("ended", () => {
-    wrap.classList.add("hidden");
-    wrap.setAttribute("aria-hidden", "true");
-    log("Worker video finished.");
-  });
-
-  muteBtn.addEventListener("click", async () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? "🔇" : "🔈";
-    log(video.muted ? "Worker video muted." : "Worker video unmuted.");
-    // if unmuting after a block, ensure volume stays low
-    if (!video.muted) video.volume = CLAW_VIDEO_VOLUME;
-  });
-}
-
-async function playClawVideo() {
-  bindClawVideoOnce();
-
-  const wrap = document.getElementById("clawVideoWrap");
-  const video = document.getElementById("clawVideo");
-  const muteBtn = document.getElementById("clawMuteBtn");
-  if (!wrap || !video) return;
-
-  // show the video in the corner
-  wrap.classList.remove("hidden");
-  wrap.setAttribute("aria-hidden", "false");
-
-  // restart from beginning
-  try { video.currentTime = 0; } catch {}
-
-  // low volume
-  video.volume = CLAW_VIDEO_VOLUME;
-  video.muted = false;
-  if (muteBtn) muteBtn.textContent = "🔈";
-
-  // Attempt to play with low volume (user click -> should be allowed)
-  try {
-    await video.play();
-    log(`Worker video started (volume=${CLAW_VIDEO_VOLUME}).`);
-  } catch (e) {
-    // fallback: autoplay policies sometimes block audio; play muted
-    video.muted = true;
-    if (muteBtn) muteBtn.textContent = "🔇";
-    try {
-      await video.play();
-      log("Worker video started muted (browser blocked audio autoplay).");
-    } catch (err2) {
-      wrap.classList.add("hidden");
-      wrap.setAttribute("aria-hidden", "true");
-      log("Worker video could not play (check file path or browser autoplay).");
-    }
-  }
 }
 
 async function fetchTickets(query="") {
@@ -151,7 +81,7 @@ function renderStats() {
     <div class="stat"><div class="num">${state.tickets.length}</div><div class="label">Demo tickets loaded</div></div>
     <div class="stat"><div class="num">Matrix</div><div class="label">Matrix-first decisioning</div></div>
     <div class="stat"><div class="num">Local</div><div class="label">No external calls</div></div>
-    <div class="stat"><div class="num">Video</div><div class="label">Corner worker animation</div></div>
+    <div class="stat"><div class="num">Trace</div><div class="label">Red → Green progress</div></div>
   `;
 }
 
@@ -193,195 +123,125 @@ window.previewTicket = function(ticketId) {
   `;
 };
 
-async function slowRevealExplainSteps(explainSteps) {
-  const container = document.getElementById("explainSteps");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  for (let i = 0; i < explainSteps.length; i++) {
-    const s = explainSteps[i];
-
-    const node = document.createElement("div");
-    node.className = "step active";
-    node.innerHTML = `
-      <div class="title">${esc(s.title)}</div>
-      <div class="why">${esc(s.why)}</div>
-      <div class="src">
-        <div class="muted tiny"><b>Source</b></div>
-        <pre>${esc(JSON.stringify(s.source, null, 2))}</pre>
-      </div>
-    `;
-    container.appendChild(node);
-
-    Array.from(container.children).forEach((c, idx) => {
-      c.classList.toggle("active", idx === i);
-      c.classList.toggle("done", idx < i);
-    });
-
-    await new Promise(r => setTimeout(r, EXPLAIN_STEP_MS));
-  }
-
-  Array.from(container.children).forEach(c => {
-    c.classList.remove("active");
-    c.classList.add("done");
-  });
-}
-
-async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 window.solveTicket = async function(ticketId) {
   const t = state.tickets.find(x => x.ticket_id === ticketId);
   if (!t) return;
 
   clearLog();
   log(`Solve clicked for ticket #${ticketId}`);
-  log(`Building minimized payload (security): subject + description + core fields only`);
-
-  // ✅ start the corner video on solve click
-  await playClawVideo();
 
   const payload = buildSolvePayload(t);
-  log(`POST /api/solve → localhost:4000`);
-  log(`Payload keys: ${Object.keys(payload).join(", ")}`);
+  log(`Payload built (minimized). Keys: ${Object.keys(payload).join(", ")}`);
 
-  const overlayStages = [
-    "Read ticket subject + description",
-    "Select Case Key (matrix category)",
-    "Load matrix row",
-    "Check if call is required (hotel/supplier)",
-    "Generate QA-safe reply + internal note"
+  const steps = [
+    "Build secure payload (client)",
+    "Send request to backend (/api/solve)",
+    "Backend: classify ticket → Case Key",
+    "Backend: load matrix row + check call requirement",
+    "Backend: generate QA-safe reply + internal note",
   ];
 
   setOverlay(true, "Solving ticket…", "Starting…");
-  renderOverlaySteps(overlayStages, 0);
 
-  let stage = 0;
-  const stageTimer = setInterval(() => {
-    stage = Math.min(stage + 1, overlayStages.length - 1);
-    document.getElementById("loadingMsg").textContent = overlayStages[stage];
-    renderOverlaySteps(overlayStages, stage);
-  }, OVERLAY_STEP_MS);
+  // Everything starts RED (pending). Active is RED. Done turns GREEN.
+  let activeIndex = 0;
+  let doneCount = 0;
+  renderOverlaySteps(steps, activeIndex, doneCount);
 
-  const t0 = performance.now();
+  // Step 1: payload
+  document.getElementById("loadingMsg").textContent = "Building secure payload…";
+  await sleep(STEP_PAUSE_MS);
+  doneCount = 1; activeIndex = 1;
+  renderOverlaySteps(steps, activeIndex, doneCount);
 
-  try {
-    const res = await fetch(`${API_BASE}/solve`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    const ms = Math.round(performance.now() - t0);
+  // Step 2: send request
+  document.getElementById("loadingMsg").textContent = "Sending request to backend…";
+  await sleep(600);
+  const fetchPromise = fetch(`${API_BASE}/solve`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  doneCount = 2; activeIndex = 2;
+  renderOverlaySteps(steps, activeIndex, doneCount);
 
-    log(`Response received in ${ms}ms`);
-    log(`Decision: ${data.status} | ${data.caseKey}`);
-    if (data.decision?.triggers?.length) log(`Triggers: ${data.decision.triggers.join(" | ")}`);
+  // Step 3: waiting for backend response (active stays RED until response)
+  document.getElementById("loadingMsg").textContent = "Waiting for backend response…";
+  const res = await fetchPromise;
+  const data = await res.json();
+  log(`Backend returned: ${data.status} | ${data.caseKey}`);
 
-    const humanBox = data.humanActionRequired
-      ? `<div class="block">
-           <div class="block-head">
-             <h3>Human Action Required</h3>
-             <span class="pill yellow">STOP</span>
-           </div>
-           <pre>${esc(data.humanActionRequired)}</pre>
-         </div>`
-      : "";
+  // Step 3: classify complete
+  document.getElementById("loadingMsg").textContent = "Backend classified ticket…";
+  await sleep(STEP_PAUSE_MS);
+  doneCount = 3; activeIndex = 3;
+  renderOverlaySteps(steps, activeIndex, doneCount);
 
-    const refundBox = data.refundQueueInstruction
-      ? `<div class="block">
-           <div class="block-head">
-             <h3>Refund Queue Instruction</h3>
-             <span class="pill blue">QUEUE</span>
-           </div>
-           <pre>${esc(data.refundQueueInstruction)}</pre>
-         </div>`
-      : "";
+  // Step 4: matrix + call check complete
+  document.getElementById("loadingMsg").textContent = "Backend loaded matrix row + checked call triggers…";
+  await sleep(STEP_PAUSE_MS);
+  doneCount = 4; activeIndex = 4;
+  renderOverlaySteps(steps, activeIndex, doneCount);
 
-    document.getElementById("solverOutput").innerHTML = `
+  // Step 5: outputs complete
+  document.getElementById("loadingMsg").textContent = "Backend generated QA-safe outputs…";
+  await sleep(STEP_PAUSE_MS);
+  doneCount = 5; activeIndex = 4;
+  renderOverlaySteps(steps, activeIndex, doneCount);
+
+  // Show result in UI
+  document.getElementById("solverOutput").innerHTML = `
+    <div class="block">
+      <div class="block-head">
+        <h3>Result</h3>
+        <span class="pill ${data.status === "AUTO-SOLVED" ? "green" : "yellow"}">${esc(data.status)}</span>
+      </div>
+      <div class="kv">
+        <span><b>Ticket</b> #${esc(data.ticketId)}</span>
+        <span><b>Guest</b> ${esc(data.guest)}</span>
+        <span><b>Itinerary</b> ${esc(data.itinerary)}</span>
+        <span><b>Case Key</b> ${esc(data.caseKey)}</span>
+        <span><b>Matrix Row</b> ${esc(data.matrixRow?.sheet_row ?? "N/A")}</span>
+      </div>
+    </div>
+
+    ${data.humanActionRequired ? `
       <div class="block">
         <div class="block-head">
-          <h3>Result</h3>
-          ${pill(data.status)}
+          <h3>Human Action Required</h3>
+          <span class="pill yellow">STOP</span>
         </div>
-        <div class="kv">
-          <span><b>Ticket</b> #${esc(data.ticketId)}</span>
-          <span><b>Guest</b> ${esc(data.guest)}</span>
-          <span><b>Itinerary</b> ${esc(data.itinerary)}</span>
-          <span><b>Case Key</b> ${esc(data.caseKey)}</span>
-          <span><b>Matrix Row</b> ${esc(data.matrixRow?.sheet_row ?? "N/A")}</span>
-        </div>
-      </div>
+        <pre>${esc(data.humanActionRequired)}</pre>
+      </div>` : ""}
 
+    <div class="block">
+      <div class="block-head">
+        <h3>Customer Reply</h3>
+      </div>
+      <pre>${esc(data.customerReply || "")}</pre>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <h3>Internal Private Note</h3>
+      </div>
+      <pre>${esc(data.privateNote || "")}</pre>
+    </div>
+
+    ${data.refundQueueInstruction ? `
       <div class="block">
         <div class="block-head">
-          <h3>Why these steps (slow reveal)</h3>
-          <span class="pill blue">TRACE</span>
+          <h3>Refund Queue Instruction</h3>
         </div>
-        <div id="explainSteps" class="stepper"></div>
-      </div>
+        <pre>${esc(data.refundQueueInstruction)}</pre>
+      </div>` : ""}
+  `;
 
-      ${humanBox}
-
-      <div class="grid2">
-        <div class="block">
-          <div class="block-head">
-            <h3>Customer Reply</h3>
-            <div class="copy-row">
-              <button class="btn-small" id="copyReplyBtn">Copy</button>
-            </div>
-          </div>
-          <pre id="replyText">${esc(data.customerReply)}</pre>
-        </div>
-
-        <div class="block">
-          <div class="block-head">
-            <h3>Internal Private Note</h3>
-            <div class="copy-row">
-              <button class="btn-small" id="copyNoteBtn">Copy</button>
-            </div>
-          </div>
-          <pre id="noteText">${esc(data.privateNote)}</pre>
-        </div>
-      </div>
-
-      ${refundBox}
-    `;
-
-    document.getElementById("copyReplyBtn").onclick = async () => {
-      const ok = await copyToClipboard(data.customerReply || "");
-      log(ok ? "Copied customer reply to clipboard." : "Copy failed (browser permission).");
-    };
-
-    document.getElementById("copyNoteBtn").onclick = async () => {
-      const ok = await copyToClipboard(data.privateNote || "");
-      log(ok ? "Copied private note to clipboard." : "Copy failed (browser permission).");
-    };
-
-    await slowRevealExplainSteps(data.explainSteps || []);
-
-  } catch (e) {
-    log(`ERROR: ${e?.message || e}`);
-    document.getElementById("solverOutput").innerHTML = `
-      <div class="block">
-        <div class="block-head">
-          <h3>Solver Error</h3>
-          <span class="pill red">ERROR</span>
-        </div>
-        <pre>${esc(String(e?.message || e))}</pre>
-      </div>
-    `;
-  } finally {
-    clearInterval(stageTimer);
-    setOverlay(false);
-  }
+  // Finish overlay
+  document.getElementById("loadingTitle").textContent = "Completed";
+  document.getElementById("loadingMsg").textContent = "All steps finished (green).";
+  await sleep(650);
+  setOverlay(false);
 };
 
 document.getElementById("searchInput").addEventListener("input", (e) => fetchTickets(e.target.value));
@@ -396,9 +256,16 @@ document.getElementById("regenBtn").addEventListener("click", async () => {
   log(`Regenerating demo tickets: ${count}`);
 
   setOverlay(true, "Generating demo tickets…", `Creating ${count} tickets locally…`);
-  renderOverlaySteps(["Generate tickets", "Write fakeTickets.json", "Reload UI"], 0);
+
+  const steps = ["Generate tickets", "Write fakeTickets.json", "Reload UI"];
+  let doneCount = 0;
+  renderOverlaySteps(steps, 0, doneCount);
 
   try {
+    await sleep(600);
+    doneCount = 1;
+    renderOverlaySteps(steps, 1, doneCount);
+
     const res = await fetch(`${API_BASE}/demo/regenerate?count=${encodeURIComponent(count)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -408,18 +275,22 @@ document.getElementById("regenBtn").addEventListener("click", async () => {
     if (!json.ok) throw new Error(json.error || "Failed to regenerate");
 
     log(`Generated ${json.count} tickets (seed=${json.seed})`);
-    renderOverlaySteps(["Generate tickets", "Write fakeTickets.json", "Reload UI"], 2);
+    doneCount = 2;
+    renderOverlaySteps(steps, 2, doneCount);
 
     await fetchTickets(document.getElementById("searchInput").value);
+    doneCount = 3;
+    renderOverlaySteps(steps, 2, doneCount);
+
   } catch (e) {
     log(`ERROR: ${e?.message || e}`);
     alert(`Failed: ${e?.message || e}`);
   } finally {
+    document.getElementById("loadingTitle").textContent = "Done";
+    document.getElementById("loadingMsg").textContent = "Finished.";
+    await sleep(550);
     setOverlay(false);
   }
 });
-
-// bind video controls on load
-bindClawVideoOnce();
 
 fetchTickets();

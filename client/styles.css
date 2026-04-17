@@ -191,34 +191,7 @@ pre{
 }
 .empty{color:var(--muted);padding:10px}
 
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.copy-row{display:flex;gap:10px;flex-wrap:wrap}
-
-.btn-small{
-  padding:8px 10px;
-  border-radius:10px;
-  font-weight:900;
-  background:rgba(255,255,255,.07);
-}
-
-.kv{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:12px;margin-top:8px}
-.kv b{color:var(--text)}
-
-.stepper{display:flex;flex-direction:column;gap:10px}
-.step{
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:14px;
-  padding:12px;
-  background:rgba(7,20,35,.45);
-}
-.step .title{font-weight:900}
-.step .why{color:#d8e7ff;margin-top:6px;line-height:1.45}
-.step .src{margin-top:8px}
-
-.step.pending{opacity:.60}
-.step.active{outline:2px solid rgba(87,182,255,.30)}
-.step.done{opacity:1}
-
+/* Overlay */
 .overlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,.55);
@@ -228,13 +201,15 @@ pre{
 .hidden{display:none}
 .overlay-card{
   width:min(760px, calc(100vw - 40px));
+  max-height: 88vh;
+  overflow: auto;
   background:rgba(15,27,45,.96);
   border:1px solid var(--border);
   border-radius:18px;
   padding:16px;
   box-shadow:0 18px 50px rgba(0,0,0,.55);
 }
-.overlay-top{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.overlay-top{display:flex;gap:12px;align-items:center;margin-bottom:10px}
 .overlay-title{font-weight:1000;font-size:16px}
 .overlay-msg{color:var(--muted);font-size:13px;margin-top:2px}
 .overlay-hint{color:rgba(169,193,221,.9);font-size:12px;margin-top:10px}
@@ -247,56 +222,48 @@ pre{
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.overlay-steps ul{margin:8px 0 0;padding-left:18px;color:#d8e7ff}
-.overlay-steps li{margin:6px 0}
+.overlay-steps ul{margin:10px 0 0;padding-left:18px}
 
-/* ✅ Bottom-right worker video */
-.claw-video-wrap{
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  width: 320px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.14);
-  box-shadow: 0 18px 50px rgba(0,0,0,.55);
-  background: rgba(15,27,45,.92);
-  z-index: 9998; /* below overlay (9999), above page */
+/* ✅ Progress colors: pending/current = RED, done = GREEN */
+.overlay-steps li{
+  margin:8px 0;
+  padding:8px 10px;
+  border-radius:12px;
+  list-style: none;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(251,113,133,.10);          /* red-ish */
+  color: #ffe4ea;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-.claw-video{
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.claw-video-badge{
-  position:absolute;
-  left: 10px;
-  top: 10px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(52,211,153,.16);
-  border: 1px solid rgba(52,211,153,.28);
-  font-weight: 900;
+.overlay-steps li::before{
+  content:"●";
+  color: var(--red);
   font-size: 12px;
-  color: var(--text);
-  z-index: 2;
 }
-.claw-mute-btn{
-  position:absolute;
-  right: 10px;
-  top: 10px;
-  padding: 8px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  font-weight: 900;
-  z-index: 2;
+
+.overlay-steps li.done{
+  background: rgba(52,211,153,.10);
+  color: #d9ffe9;
+  border-color: rgba(52,211,153,.25);
 }
-.claw-mute-btn:hover{background: rgba(255,255,255,.12)}
+.overlay-steps li.done::before{
+  content:"✓";
+  color: var(--green);
+  font-size: 14px;
+}
+
+.overlay-steps li.active{
+  outline: 2px solid rgba(251,113,133,.30);
+}
+.overlay-steps li.active::before{
+  content:"⏳";
+  color: var(--red);
+}
 
 @media(max-width:1100px){
   .hero,.layout,.stats{grid-template-columns:1fr}
   .hero-right{align-items:stretch}
   .row{justify-content:flex-start}
-  .claw-video-wrap{width: 260px}
 }

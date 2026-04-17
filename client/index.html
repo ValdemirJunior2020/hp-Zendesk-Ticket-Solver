@@ -55,14 +55,14 @@
 
         <div id="solverOutput" class="solver-output">
           <div class="empty">
-            Select a ticket and click <b>Solve Ticket</b> (or use the Solve button on the ticket).
+            Select a ticket and click <b>Solve Ticket</b>.
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- Overlay with step-by-step progress -->
+  <!-- ✅ Loading notes only (NO VIDEO) -->
   <div id="loadingOverlay" class="overlay hidden" aria-hidden="true">
     <div class="overlay-card">
       <div class="overlay-top">
@@ -74,27 +74,12 @@
       </div>
 
       <div class="overlay-steps">
-        <div class="muted tiny">Live progress</div>
+        <div class="muted tiny">Live progress (red = in progress / waiting, green = completed)</div>
         <ul id="overlaySteps"></ul>
       </div>
 
       <div class="overlay-hint">No external calls. This demo runs on localhost only.</div>
     </div>
-  </div>
-
-  <!-- ✅ Bottom-right video (plays when Solve is clicked) -->
-  <div id="clawVideoWrap" class="claw-video-wrap hidden" aria-hidden="true" title="Demo: OpenClaw worker">
-    <div class="claw-video-badge">Working…</div>
-    <video
-      id="clawVideo"
-      class="claw-video"
-      preload="auto"
-      playsinline
-    >
-      <source src="./Assets/Animated_Claw_Worker_Resolves_Ticket.mp4" type="video/mp4" />
-    </video>
-
-    <button id="clawMuteBtn" class="claw-mute-btn" type="button">🔈</button>
   </div>
 
   <script src="./app.js"></script>

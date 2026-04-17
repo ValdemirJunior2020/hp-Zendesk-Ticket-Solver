@@ -1,0 +1,482 @@
+[
+  {
+    "sheet_row": 5,
+    "case_key": "Ticket | Reservation not found at check-in",
+    "raw_issue": "Reservation not found at check-in",
+    "instructions": "1. Call Supplier, 2. If unconfirmed by the Supplier in 20 minutes, 3. Create a Voucher and Rebook (if current hotel has inventory) or Relocate by Booking at a near by hotel. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in they are lowering the number of nights they will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 5. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 5. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 6. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days).",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "YES"
+  },
+  {
+    "sheet_row": 6,
+    "case_key": "Ticket | Overbooking leading to relocation (“walked” reservation) or Hotel Is Closed Down",
+    "raw_issue": "Overbooking leading to relocation (“walked” reservation) or Hotel Is Closed Down",
+    "instructions": "1. Call Supplier, 2. If unconfirmed by the Supplier in 10 minutes, 3. Create a Voucher and Rebook (if current hotel has inventory) or Relocate by Booking at a near by hotel. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in they are lowering the number of nights they will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 5. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 5. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 6. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days).",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "Yes"
+  },
+  {
+    "sheet_row": 7,
+    "case_key": "Ticket | Incorrect guest name or modifying name",
+    "raw_issue": "Incorrect guest name or modifying name",
+    "instructions": "If Name: Call the hotel and ask them to \"add\" the name (not to change the name), 2. If the hotel refuses then call the supplier and ask them to change it. 3. If the supplier is unable please go back to the phone and let the guest know you will rebook them under the correct name. 4. If they agree, create a voucher and rebook them under their preferred name. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 5. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 6. If the guest declines support then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 7. Process a refund via the queue for the client and advise them of the refund timeline (2-7 business days).",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "No"
+  },
+  {
+    "sheet_row": 8,
+    "case_key": "Ticket | Incorrect  dates or modifying dates",
+    "raw_issue": "Incorrect  dates or modifying dates",
+    "instructions": "If the issue is the dates: (Prepaid) 1. Create a voucher via the refund queue and rebook the guest for the correct dates. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in the client is lowering the number of nights the client will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 2. After the guest has their new reservation and confirmation let them go and place yourself on DND. 3. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 3. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). (Pay at Hotel) 1. Call the hotel, ask for the dates to be changed, if the hotel agrees note the request accurately with the hotel staff member's name, (if possible) the confirmation number, and the email of the front desk. 2. Let the guest know their requested change is completed. 3. If the hotel declines the modification, check the website to confirm we have availability, advise the guest that you will need to request cancellation to rebook them, go back to the hotel, obtain FOC from the hotel, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Rebook the client for their perferred hotel or near by hotel if inventory is not available. 5. Complete the reservation, confirm the guest has received their confirmation and note the orginial booking with the new itinerary.",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "No"
+  },
+  {
+    "sheet_row": 9,
+    "case_key": "Ticket | Incorrect number of guests or modifying guest count",
+    "raw_issue": "Incorrect number of guests or modifying guest count",
+    "instructions": "If the property is in the USA and not a resort: Call the front desk and have the reservation updated for the correct number of guests. If the hotel property is outside the USA or is a resort: 1. Create a voucher via the refund queue and rebook the guest for the correct occupancy. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 2. After the guest has their new reservation and confirmation let them go and place yourself on DND. 3. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 3. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). (Pay at Hotel) 1. Call the hotel, ask for the occupancy to be changed, if the hotel agrees note the request accurately with the hotel staff member's name, (if possible) the confirmation number, and the email of the front desk. 2. Let the guest know their requested change is completed. 3. If the hotel declines the modification, check the website to confirm we have availability, advise the guest that you will need to request cancellation to rebook them, go back to the hotel, obtain FOC from the hotel, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Rebook the client for their perferred hotel or near by hotel if inventory is not available. 5. Complete the reservation, confirm the guest has received their confirmation and note the orginial booking with the new itinerary. IF THE RESERVATION IS MORE YOU WILL ASK THE GUEST TO PAY THE DIFFERNCE AND OPEN A TICKET FOR SUPERVISOR REVIEW. OCCUPANCY ERROR FROM SALES AGENTS WILL BE REFUNDED TO THE GUEST; PLEASE ADVISE THE GUEST OF THIS AND LET THEM KNOW IT WILL BE REVIEWED IN 1-2 BUSINESS DAYS. IF THE GUEST REFUSES TO PAY THE DIFFERENCE THEN YOU WILL NEED TO NOTIFY ON YOUR ON SHIFT SUPERVISOR SO THEY CAN GET A VOUCHER FROM US TO PAY THE DIFFERENCE. THIS IS FOR SITE ERRORS AND SALES AGENT ERRORS THAT WE CAN SUPPORT THE DIFFERENCE IN COST. IF THE OCCUPANCY ERROR IS FROM A GUEST SELF-BOOKING THEMSELVES THESE WILL MOST LIKELY WILL NOT RECEVIE REIMBURSEMENT.",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "YES"
+  },
+  {
+    "sheet_row": 10,
+    "case_key": "Ticket | Payment declined at check-in despite prepayment",
+    "raw_issue": "Payment declined at check-in despite prepayment",
+    "instructions": "1. Call Supplier, 2. If unpaid by the Supplier in 20 minutes 3. Create a Voucher and Rebook (if current hotel has inventory) or Relocate by Booking at a near by hotel. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in they are lowering the number of nights they will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 5. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 5. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 6. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). EXCEPTION IS DERBYSOFT ** INSTEAD OF CALLING THE SUPPLIER** ASK THE CHANNEL MANAGER FOR THE VIRTUAL CARD. IF NOT PROVIDED IN 20 MINUTES; MOVE FORWARD WITH REBOOKING THE GUEST.",
+    "slack_rule": "YES - Only for same day check in's AND DERBYSOFT. DERBYSOFT VIRTUAL CARDS WILL COME FROM HOTELPLANNER. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 11,
+    "case_key": "Ticket | Rebooking due to wrong hotel booked or modifying to a new hotel",
+    "raw_issue": "Rebooking due to wrong hotel booked or modifying to a new hotel",
+    "instructions": "(Prepaid) 1. Create a voucher via the refund queue and rebook the guest for the correct hotel. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in the client is lowering the number of nights the client will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 2. After the guest has their new reservation and confirmation let them go and place yourself on DND. 3. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 3. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). (Pay at Hotel) 1. Call the hotel, ask for FOC from the hotel, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Rebook the client for their perferred hotel or near by hotel if inventory is not available. 5. Complete the reservation, confirm the guest has received their confirmation and note the orginial booking with the new itinerary.",
+    "slack_rule": "YES - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 12,
+    "case_key": "Ticket | Shuttle not available to get to property",
+    "raw_issue": "Shuttle not available to get to property",
+    "instructions": "Offer the guest 15% compensation toward ordering an UBER or LYFT and create the refund request in the refund queue. If they decline and say it will cost more than the 15% advise the guest they can book an Uber or Lyft and forward the receipt along with their itinerary to Reservations@HotelPlanner.com for reimbursement. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 13,
+    "case_key": "Ticket | Early check-in or late check-out requests",
+    "raw_issue": "Early check-in or late check-out requests",
+    "instructions": "Call the hotel and make the request on behalf of the guest.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 14,
+    "case_key": "Ticket | Early check-in or late check-out not honored",
+    "raw_issue": "Early check-in or late check-out not honored",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If not agent error then advise these requests are to the discretion of the hotel. If the guest advises this is due to sales agent error then open a ticket for further review.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 15,
+    "case_key": "Ticket | Hotel unaware of special requests or notes",
+    "raw_issue": "Hotel unaware of special requests or notes",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 16,
+    "case_key": "Ticket | Additional deposits or incidentals required unexpectedly",
+    "raw_issue": "Additional deposits or incidentals required unexpectedly",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 17,
+    "case_key": "Ticket | Long wait times or poor service at check-in",
+    "raw_issue": "Long wait times or poor service at check-in",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. These options are to the discretion of the hotel and not in our control.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 18,
+    "case_key": "Ticket | Duplicate bookings made accidentally",
+    "raw_issue": "Duplicate bookings made accidentally",
+    "instructions": "ASK THE HOTELS TO CANCEL DUPLICATES: Please call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 7. Process a refund via the queue for the client and advise them of the refund timeline (2-7 business days). ** Only refund if applicable - if you are cancelling a duplicate that is only visible in the hotel's data base but not in our platform then the guest was not charged twice and no refund would be processed.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 19,
+    "case_key": "Ticket | Room type, Bed type or accessibility features not honored or Modifying Room Request",
+    "raw_issue": "Room type, Bed type or accessibility features not honored or Modifying Room Request",
+    "instructions": "1. Call the hotel and ask them to move the guest to the appropriate room or requested room type 2. If the hotel refuses to do the change complimentary then ask them how much the upgrade or room change will cost. If the hotel agrees to charge a fee or the upgrade then advise the guest to pay the charge upon arrival. Ask the guest to email the receipt of the charge to Reservations@HotelPlanner.com for reimbursement. 3. If the hotel refuses all changes and requires a new reservation, confirm with the front desk the property has availabitlity if we rebook the guest for the correct room type, once the hotel confirms they do, request a cancellation on the existing room for FOC to rebook the guest, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Advise the guest you will rebook them for the correct room if the guest agrees, create a voucher and rebook them for their preferred room type. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 6. If the guest declines support then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 7. Process a refund via the queue for the client and advise them of the refund timeline (2-7 business days).",
+    "slack_rule": "Yes - Only for same day check in's. NO SLACK FOR FUTURE DATES.",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 20,
+    "case_key": "Ticket | Promised amenities missing (breakfast, parking, Wi-Fi, view)",
+    "raw_issue": "Promised amenities missing (breakfast, parking, Wi-Fi, view)",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 21,
+    "case_key": "Ticket | Rate does not include expected inclusions",
+    "raw_issue": "Rate does not include expected inclusions",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 22,
+    "case_key": "Ticket | Hotel requests payment again for a prepaid booking",
+    "raw_issue": "Hotel requests payment again for a prepaid booking",
+    "instructions": "1. Call the Supplier to provide payment for the hotel. 2. If unpaid by the Supplier in 20 minutes create a ticket and advise the hotel we will have this resolved in 24 hours. EXCEPTION IS DERBYSOFT ASK THE CHANNEL MANAGER FOR THE VIRTUAL CARD. IF NOT PROVIDED WITHIN 5 MINUTES; OPEN A TICKET AND ADVISE THE HOTEL WE WILL HAVE THIS RESOLVED IN 24 HOURS.",
+    "slack_rule": "YES",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "Yes - Drop Down Option \"Hotel Needs Support\" if unresolved",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 23,
+    "case_key": "Ticket | Charged more than expected  (resort fees or local fees)",
+    "raw_issue": "Charged more than expected  (resort fees or local fees)",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 24,
+    "case_key": "Ticket | Price Matching & Complaints regarding Tax Recovery & Fees",
+    "raw_issue": "Price Matching & Complaints regarding Tax Recovery & Fees",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 25,
+    "case_key": "Ticket | Currency conversion discrepancies",
+    "raw_issue": "Currency conversion discrepancies",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - If they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 26,
+    "case_key": "Ticket | Refund delays after cancellation or modification",
+    "raw_issue": "Refund delays after cancellation or modification",
+    "instructions": "Review and Create a Refund in the Refund Queue",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 27,
+    "case_key": "Ticket | Discrepanies from booking refundable vs. non-refundable",
+    "raw_issue": "Discrepanies from booking refundable vs. non-refundable",
+    "instructions": "(Prepaid) 1. Create a voucher via the refund queue and rebook the guest for the correct policy. ** Do your best to upgrade the client's room type to use full voucher value for their new reservation** The exception would be in the client is lowering the number of nights the client will expect a refund of the unused night(s). If there are any unused funds; Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). 2. After the guest has their new reservation and confirmation let them go and place yourself on DND. 3. Call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 3. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Process a refund via the queue for the client and advise of the refund timeline (2-7 business days). (Pay at Hotel) 1. Call the hotel, ask for FOC from the hotel, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 4. Rebook the client for their perferred policy or near by hotel if inventory is not available. 5. Complete the reservation, confirm the guest has received their confirmation and note the orginial booking with the new itinerary. 6. If the guest declines support and requests a refund; then call the hotel and obtain FOC, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property and provide it to the guest to request a free cancellation.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - for a voucher if rebooking",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 28,
+    "case_key": "Ticket | Unable to \"Create a Refund\" in the refund queue",
+    "raw_issue": "Unable to \"Create a Refund\" in the refund queue",
+    "instructions": "The refund tool is not working",
+    "slack_rule": "YES",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "YES"
+  },
+  {
+    "sheet_row": 29,
+    "case_key": "Ticket | Supplier, Hotel, and Group Calls",
+    "raw_issue": "Supplier, Hotel, and Group Calls",
+    "instructions": "Instructions",
+    "slack_rule": "Slack​",
+    "refund_queue_rule": "Refund Queue",
+    "create_ticket_rule": "Create a Ticket",
+    "supervisor_rule": "Supervisor"
+  },
+  {
+    "sheet_row": 30,
+    "case_key": "Ticket | Hotel Calls",
+    "raw_issue": "Hotel Calls",
+    "instructions": "Create a ticket for under \"Hotel Needs Support\", if they wish to speak with a manager please ask them to email VIPRES@HotelPlanner.com to contact our Service Managers.",
+    "slack_rule": "No",
+    "refund_queue_rule": "No",
+    "create_ticket_rule": "Yes - Drop Down Option \"Hotel Needs Support\"",
+    "supervisor_rule": "No"
+  },
+  {
+    "sheet_row": 31,
+    "case_key": "Ticket | Supplier Calls",
+    "raw_issue": "Supplier Calls",
+    "instructions": "Create a ticket for review under \"Supplier Needs Support\", if they wish to speak with a manager please ask them to email VIPRES@HotelPlanner.com to contact our Service Managers.",
+    "slack_rule": "No",
+    "refund_queue_rule": "No",
+    "create_ticket_rule": "Yes - Drop Down Option \"Supplier Needs Support\"",
+    "supervisor_rule": "No"
+  },
+  {
+    "sheet_row": 32,
+    "case_key": "Ticket | Group Clients",
+    "raw_issue": "Group Clients",
+    "instructions": "Client is unable to contact the agent assigned/planner for their Group Request and/or unable to access their account",
+    "slack_rule": "Yes",
+    "refund_queue_rule": "No",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "No"
+  },
+  {
+    "sheet_row": 33,
+    "case_key": "Ticket | Cancellation & Confirmations",
+    "raw_issue": "Cancellation & Confirmations",
+    "instructions": "Instructions",
+    "slack_rule": "Slack​",
+    "refund_queue_rule": "Refund Queue",
+    "create_ticket_rule": "Create a Ticket",
+    "supervisor_rule": "Supervisor"
+  },
+  {
+    "sheet_row": 34,
+    "case_key": "Ticket | Cancelling Refundable",
+    "raw_issue": "Cancelling Refundable",
+    "instructions": "If a guest is requesting to cancel a refundable room, select cancel, and confirm their refund was processed. If the refund does not process automatically then put the refund into the refund queue. Do not refund the RPP.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - if not processed automatically",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 35,
+    "case_key": "Ticket | Cancelling Non Refundable",
+    "raw_issue": "Cancelling Non Refundable",
+    "instructions": "If a guest is requesting to cancel a non refundable room type (reasons why we would process are agent error, hotel closure or unable to accept the guest, unpredictable or dangerous weather conditions, death, flight cancellations, medical, emergencies, gesture of goodwill due to the hotel's exception). 1. Check to see if the reservation has RPP, if yes offer to email the claim link to the client or the guest can receive 100% voucher immediately. If the guest denies the voucher please reach out to the hotel to see if we can obtain a waiver. 2. Call the hotel and request FOC, note the booking accurately with the hotel staff member's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. If you are unable to obtain FOC, ask the hotel for a waiver minus one night (for multi nights), if it's still denied then we can offer the guest the option to add a name so a friend or family member can use the room. If none of these options are acceptable we would offer 100% voucher or 50% refund. Make sure the guest is aware the hotel is denying the refund in case they would like to contact the hotel directly for a full waiver. If you do obtain FOC then note the request accurately and completely. Then process a refund via the Refund Queue for the amount you were able to get waived. Advise the guest of the refund timeline (2-7 business days). Do not refund the RPP.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - when applicable",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 36,
+    "case_key": "Ticket | Conflicting information between hotel and booking provider",
+    "raw_issue": "Conflicting information between hotel and booking provider",
+    "instructions": "Offer the guest 15% compensation and create the refund request in the refund queue. If they decline and ask for more money please have the guest send their receipt or a copy of the charge to Reservations@HotelPlanner.com. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES - if they accept 15% compensation",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 37,
+    "case_key": "Ticket | Guest directed to the wrong customer service provider",
+    "raw_issue": "Guest directed to the wrong customer service provider",
+    "instructions": "Ask the guest if they can review the charge to confirm who it is from and if it includes a phone number to call. If the guest can not a phone number and would like it reviewed; Please ask the guest to forward their charges to Reservations@HotelPlanner.com, please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 38,
+    "case_key": "Ticket | Confirmation email not received or went to spam",
+    "raw_issue": "Confirmation email not received or went to spam",
+    "instructions": "If the guest needs a copy of their confirmation please confirm their email address and cell phone number to resend them a copy. Confirm it was received before disconnecting the call.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 39,
+    "case_key": "Ticket | Delayed or unclear resolution timelines",
+    "raw_issue": "Delayed or unclear resolution timelines",
+    "instructions": "If the guest wishes to speak with a manager please ask them to email VIPRES@HotelPlanner.com to contact our Service Managers; please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "YES"
+  },
+  {
+    "sheet_row": 40,
+    "case_key": "Ticket | Post Stay Issues",
+    "raw_issue": "Post Stay Issues",
+    "instructions": "Instructions",
+    "slack_rule": "Slack​",
+    "refund_queue_rule": "Refund Queue",
+    "create_ticket_rule": "Create a Ticket",
+    "supervisor_rule": "Supervisor"
+  },
+  {
+    "sheet_row": 41,
+    "case_key": "Ticket | Incorrect final charges",
+    "raw_issue": "Incorrect final charges",
+    "instructions": "Advise the guest they can forward the receipt along with their itinerary to Reservations@HotelPlanner.com for review and reimbursement; please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 42,
+    "case_key": "Ticket | Missing or delayed refunds",
+    "raw_issue": "Missing or delayed refunds",
+    "instructions": "Review and Create a Refund in the Refund Queue",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 43,
+    "case_key": "Ticket | Disputes over no-show or cancellation fees",
+    "raw_issue": "Disputes over no-show or cancellation fees",
+    "instructions": "Provide the guest with the following email to work with the dispute department directly ChargeReview@HotelPlanner.com; please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 44,
+    "case_key": "Ticket | Hotel provided internal receipt to guest",
+    "raw_issue": "Hotel provided internal receipt to guest",
+    "instructions": "Ask the client to email the receipt to Reservations@HotelPlanner.com; please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 45,
+    "case_key": "Ticket | Needs receipt or invoice",
+    "raw_issue": "Needs receipt or invoice",
+    "instructions": "If the guest needs a copy of their confirmation please confirm their email address and cell phone number to resend them a copy. Confirm it was received before disconnecting the call. If the guest needs a detailed receipt, breakdown, or tax exempt please open a ticket for them under \"Needs Receipt\". Let the guest know we will have it completed in 24 hours and emailed over. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "Yes - Drop Down Option \"Needs Receipt\" for option 2",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 46,
+    "case_key": "Ticket | Double Charged",
+    "raw_issue": "Double Charged",
+    "instructions": "Please ask the guest to forward their charges to Reservations@HotelPlanner.com, please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 47,
+    "case_key": "Ticket | Mismatch between listing description and actual property",
+    "raw_issue": "Mismatch between listing description and actual property",
+    "instructions": "Please ask the guest to forward their screenshot to Reservations@HotelPlanner.com, please stay connected to the guest while they send this over and let them know we will have an update in 24 hours. Confirm we have the guests correct email and make sure the notes are accurate and complete.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 48,
+    "case_key": "Ticket | Early departure after check in  (R and NR)",
+    "raw_issue": "Early departure after check in  (R and NR)",
+    "instructions": "1. Ask the guest if the guest notified the property or received approval from the property for early departure. If the guest has a hotel staff name please note it down. 2.Call the hotel and obtain FOC for unused nights, note the booking accurately with the hotel staff member 's name, (if possible) the cancellation number, and the email address for the hotel manager or front desk. If you do not obtain FOC, take down hotel staff member's name and email address for the property. 3. Process a refund via the queue for the client of the unused nights and advise of the refund timeline (2-7 business days).",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 49,
+    "case_key": "Ticket | Asking for a refund on \"REFUND PROTECTION PLAN\"",
+    "raw_issue": "Asking for a refund on \"REFUND PROTECTION PLAN\"",
+    "instructions": "If the guest requests for this plan to be cancelled and refunded, please click on void the policy and the refund will be processed automatically. If it's outside the 14 days to select \"void\" then you will note the booking accurately and process the refund amount only of the RPP in the Refund Queue.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "YES",
+    "create_ticket_rule": "NONE",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 50,
+    "case_key": "Ticket | Promised accessible or handicapped room was not provided",
+    "raw_issue": "Promised accessible or handicapped room was not provided",
+    "instructions": "Offer the guest 15% compensation if they utilized the room and create the refund request in the refund queue. If the guest was not able to use the room issue a refund via the refund queue. Note the booking accurately and in detail.",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "YES",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 51,
+    "case_key": "Ticket | Call Review Needed",
+    "raw_issue": "Call Review Needed",
+    "instructions": "Move these over to VIPRES /Email VIPRESsupport@HotelPlanner.com on side conversation",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NO",
+    "supervisor_rule": "NO"
+  },
+  {
+    "sheet_row": 52,
+    "case_key": "Ticket | Legal or Government Complaints",
+    "raw_issue": "Legal or Government Complaints",
+    "instructions": "Move these over to VIPRES /Email VIPRESsupport@HotelPlanner.com on side conversation",
+    "slack_rule": "NO",
+    "refund_queue_rule": "NO",
+    "create_ticket_rule": "NO",
+    "supervisor_rule": "NO"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "hp-zendesk-ticket-solver-server",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "gen:tickets": "node scripts/generateFakeTickets.js",
+    "gen:tickets:500": "node scripts/generateFakeTickets.js 500",
+    "gen:tickets:1000": "node scripts/generateFakeTickets.js 1000"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

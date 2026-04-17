@@ -1,0 +1,102 @@
+<!-- /client/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HP Zendesk Ticket Solver Demo</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-left">
+        <div class="tag">Matrix-First Ticket Solver</div>
+        <h1>HP Zendesk Ticket Solver</h1>
+        <p class="muted">
+          Demo: classify → load matrix row → decide auto-solve vs human call → generate QA-safe reply.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <input id="searchInput" type="text" placeholder="Search by guest, itinerary, ticket, or issue..." />
+        <div class="row">
+          <input id="regenCount" type="number" min="1" max="5000" value="1000" />
+          <button id="regenBtn">Generate Demo Tickets</button>
+          <button id="refreshBtn" class="btn-ghost">Refresh</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats" id="stats"></section>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Tickets</h2>
+          <span id="ticketCount" class="muted"></span>
+        </div>
+        <div id="ticketList" class="ticket-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Solver</h2>
+          <div class="muted">local: browser → localhost:4000</div>
+        </div>
+
+        <div class="block">
+          <div class="block-head">
+            <h3>Activity Log</h3>
+            <span class="muted tiny">shows what’s happening when you click Solve</span>
+          </div>
+          <pre id="activityLog">Idle.</pre>
+        </div>
+
+        <div id="solverOutput" class="solver-output">
+          <div class="empty">
+            Select a ticket and click <b>Solve Ticket</b> (or use the Solve button on the ticket).
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Overlay with step-by-step progress -->
+  <div id="loadingOverlay" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-card">
+      <div class="overlay-top">
+        <div class="spinner"></div>
+        <div>
+          <div id="loadingTitle" class="overlay-title">Solving ticket…</div>
+          <div id="loadingMsg" class="overlay-msg">Preparing secure payload…</div>
+        </div>
+      </div>
+
+      <div class="overlay-steps">
+        <div class="muted tiny">Live progress</div>
+        <ul id="overlaySteps"></ul>
+      </div>
+
+      <div class="overlay-hint">No external calls. This demo runs on localhost only.</div>
+    </div>
+  </div>
+
+  <!-- ✅ Bottom-right video (plays when Solve is clicked) -->
+  <div id="clawVideoWrap" class="claw-video-wrap hidden" aria-hidden="true" title="Demo: OpenClaw worker">
+    <div class="claw-video-badge">Working…</div>
+    <video
+      id="clawVideo"
+      class="claw-video"
+      preload="auto"
+      playsinline
+    >
+      <source src="./Assets/Animated_Claw_Worker_Resolves_Ticket.mp4" type="video/mp4" />
+    </video>
+
+    <button id="clawMuteBtn" class="claw-mute-btn" type="button">🔈</button>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -21,6 +21,14 @@
       <div class="hero-right">
         <input id="searchInput" type="text" placeholder="Search by guest, itinerary, ticket, or issue..." />
         <div class="row">
+          <select id="filterSelect">
+            <option value="all">All</option>
+            <option value="likely_auto">Likely Auto</option>
+            <option value="likely_human">Likely Human</option>
+            <option value="solved_auto">Solved Auto</option>
+            <option value="solved_human">Solved Human</option>
+          </select>
+
           <input id="regenCount" type="number" min="1" max="5000" value="1000" />
           <button id="regenBtn">Generate Demo Tickets</button>
           <button id="refreshBtn" class="btn-ghost">Refresh</button>
@@ -42,7 +50,7 @@
       <section class="panel">
         <div class="panel-head">
           <h2>Solver</h2>
-          <div class="muted">local: browser → localhost:4000</div>
+          <div class="muted" id="apiBadge">API: —</div>
         </div>
 
         <div class="block">
@@ -62,7 +70,7 @@
     </main>
   </div>
 
-  <!-- ✅ Loading notes only (NO VIDEO) -->
+  <!-- Loading notes only -->
   <div id="loadingOverlay" class="overlay hidden" aria-hidden="true">
     <div class="overlay-card">
       <div class="overlay-top">
@@ -78,10 +86,11 @@
         <ul id="overlaySteps"></ul>
       </div>
 
-      <div class="overlay-hint">No external calls. This demo runs on localhost only.</div>
+      <div class="overlay-hint">No external calls from the browser except the API base shown above.</div>
     </div>
   </div>
 
+  <script src="./config.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

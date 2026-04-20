@@ -11,16 +11,16 @@
   --green:#34d399;
   --yellow:#fbbf24;
   --red:#fb7185;
-  --mono:#071423;
 }
 
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: radial-gradient(900px 600px at 20% 10%, rgba(87,182,255,.16), transparent 60%),
-              radial-gradient(900px 600px at 80% 0%, rgba(52,211,153,.14), transparent 55%),
-              linear-gradient(180deg, #060c16, var(--bg));
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(87,182,255,.16), transparent 60%),
+    radial-gradient(900px 600px at 80% 0%, rgba(52,211,153,.14), transparent 55%),
+    linear-gradient(180deg, #060c16, var(--bg));
   color:var(--text);
 }
 
@@ -43,8 +43,7 @@ body{
   border-radius:999px;
   background:rgba(87,182,255,.14);
   border:1px solid rgba(87,182,255,.25);
-  color:var(--text);
-  font-weight:800;
+  font-weight:900;
   font-size:12px;
   letter-spacing:.04em;
 }
@@ -58,14 +57,19 @@ h3{margin:0;font-size:14px}
 .hero-right{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
 .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;width:100%}
 
-input{
+input, select{
   width:100%;
   padding:12px 14px;
   border-radius:12px;
   border:1px solid var(--border);
-  background:rgba(7,20,35,.8);
+  background:rgba(7,20,35,.85);
   color:var(--text);
   outline:none;
+}
+
+select{
+  width: 170px;
+  cursor: pointer;
 }
 
 #regenCount{width:120px}
@@ -76,7 +80,7 @@ button{
   border:1px solid var(--border);
   background:rgba(87,182,255,.25);
   color:var(--text);
-  font-weight:800;
+  font-weight:900;
   cursor:pointer;
 }
 button:hover{background:rgba(87,182,255,.35)}
@@ -96,7 +100,7 @@ button:hover{background:rgba(87,182,255,.35)}
   padding:14px;
   box-shadow:0 14px 32px var(--shadow);
 }
-.stat .num{font-size:26px;font-weight:900}
+.stat .num{font-size:26px;font-weight:1000}
 .stat .label{color:var(--muted);font-size:12px}
 
 .layout{
@@ -130,22 +134,31 @@ button:hover{background:rgba(87,182,255,.35)}
   padding-right:6px;
 }
 
+/* Ticket card now has a colored left border to reduce confusion */
 .ticket{
   border:1px solid var(--border);
   background:rgba(19,35,58,.86);
   border-radius:16px;
   padding:14px;
+  position: relative;
 }
+.ticket.likely-auto{border-left: 6px solid rgba(52,211,153,.85);}
+.ticket.likely-human{border-left: 6px solid rgba(251,191,36,.85);}
+.ticket.solved-auto{border-left: 6px solid rgba(52,211,153,1); box-shadow: 0 0 0 2px rgba(52,211,153,.10) inset;}
+.ticket.solved-human{border-left: 6px solid rgba(251,191,36,1); box-shadow: 0 0 0 2px rgba(251,191,36,.10) inset;}
+
 .ticket-top{
   display:flex;
   justify-content:space-between;
   gap:10px;
   margin-bottom:8px;
 }
-.ticket-title{font-weight:900}
+.ticket-title{font-weight:1000}
 .ticket-meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .ticket-desc{margin-top:8px;color:#d8e7ff;line-height:1.45;font-size:13px}
 .ticket-actions{display:flex;gap:10px;margin-top:10px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 
 .pill{
   display:inline-flex;
@@ -154,7 +167,7 @@ button:hover{background:rgba(87,182,255,.35)}
   padding:6px 10px;
   border-radius:999px;
   border:1px solid var(--border);
-  font-weight:900;
+  font-weight:1000;
   font-size:12px;
 }
 .pill.green{background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.28)}
@@ -222,27 +235,25 @@ pre{
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.overlay-steps ul{margin:10px 0 0;padding-left:18px}
-
-/* ✅ Progress colors: pending/current = RED, done = GREEN */
+/* Progress colors: pending/current = RED, done = GREEN */
+.overlay-steps ul{margin:10px 0 0;padding-left:0}
 .overlay-steps li{
   margin:8px 0;
   padding:8px 10px;
   border-radius:12px;
-  list-style: none;
+  list-style:none;
   border: 1px solid rgba(255,255,255,.10);
-  background: rgba(251,113,133,.10);          /* red-ish */
+  background: rgba(251,113,133,.10);
   color: #ffe4ea;
   display:flex;
   align-items:center;
   gap:10px;
 }
 .overlay-steps li::before{
-  content:"●";
+  content:"⏳";
   color: var(--red);
-  font-size: 12px;
+  font-size: 13px;
 }
-
 .overlay-steps li.done{
   background: rgba(52,211,153,.10);
   color: #d9ffe9;
@@ -254,16 +265,9 @@ pre{
   font-size: 14px;
 }
 
-.overlay-steps li.active{
-  outline: 2px solid rgba(251,113,133,.30);
-}
-.overlay-steps li.active::before{
-  content:"⏳";
-  color: var(--red);
-}
-
 @media(max-width:1100px){
   .hero,.layout,.stats{grid-template-columns:1fr}
   .hero-right{align-items:stretch}
   .row{justify-content:flex-start}
+  select{width: 100%;}
 }

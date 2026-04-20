@@ -1,0 +1,11 @@
+# /netlify.toml
+[build]
+  base = "client"
+  publish = "client"
+  command = ""
+
+# Optional (only if you later add routing like /tickets)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
